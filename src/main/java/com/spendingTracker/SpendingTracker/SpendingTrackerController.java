@@ -29,7 +29,7 @@ public class SpendingTrackerController {
     return spendingTracking;
   }
 
-  @GetMapping("/findUser/{email}")
+  @GetMapping("/checkuserexists/{email}")
   public ResponseEntity<Boolean> findIfEmailExists(@PathVariable String email) {
     return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.checksEmailAlreadyExists(email));
   }
