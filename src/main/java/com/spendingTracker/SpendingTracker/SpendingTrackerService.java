@@ -35,4 +35,9 @@ public class SpendingTrackerService {
     public Users findUserByEmail(String email) {
         return usersRepository.findUserByEmail(email);
     }
+
+    public SpendingTracking findSpendsByUserId(long userId) {
+        return spendingTrackingRepository.findSpendsByUserId(userId);
+    }
+
 }
