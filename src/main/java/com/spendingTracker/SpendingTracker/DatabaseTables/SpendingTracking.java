@@ -12,20 +12,26 @@ public class SpendingTracking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long userId;
-    private long amount;
+    private double amount;
     private String vendor;
+    private String category;
     private LocalDate date;
 
     public SpendingTracking(){
 
     }
 
-    public SpendingTracking(long id, long userId, long amount, String vendor, LocalDate date) {
+    public SpendingTracking(long id, long userId, double amount, String vendor, String category, LocalDate date) {
         this.id = id;
         this.userId = userId;
         this.amount = amount;
         this.vendor = vendor;
+        this.category = category;
         this.date = date;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public long getId() {
@@ -36,7 +42,7 @@ public class SpendingTracking {
         return userId;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
