@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 public class SpendingTrackerController {
@@ -40,8 +42,13 @@ public class SpendingTrackerController {
   }
 
   @GetMapping("/findSpendsByUserId/{userId}")
-  public  ResponseEntity<SpendingTracking> findSpendsByUserId(@PathVariable long userId) {
+  public  ResponseEntity<List<SpendingTracking>> findSpendsByUserId(@PathVariable long userId) {
     return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.findSpendsByUserId(userId));
+  }
+
+  @GetMapping("/findSpendsForCurrentMonth/{userId}")
+  public  ResponseEntity<List<SpendingTracking>> getSpendsForCurrentMonth(@PathVariable long userId) {
+    return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.getSpendsForCurrentMonth(userId));
   }
 
 

@@ -7,6 +7,7 @@ import com.spendingTracker.SpendingTracker.Interfaces.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,8 +37,11 @@ public class SpendingTrackerService {
         return usersRepository.findUserByEmail(email);
     }
 
-    public SpendingTracking findSpendsByUserId(long userId) {
+    public List<SpendingTracking> findSpendsByUserId(long userId) {
         return spendingTrackingRepository.findSpendsByUserId(userId);
     }
 
+    public List<SpendingTracking> getSpendsForCurrentMonth(long userId) {
+        return spendingTrackingRepository.getSpendsForCurrentMonth(userId);
+    }
 }
