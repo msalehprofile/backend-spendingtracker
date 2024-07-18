@@ -44,4 +44,12 @@ public class SpendingTrackerService {
     public List<SpendingTracking> getSpendsForCurrentMonth(long userId) {
         return spendingTrackingRepository.getSpendsForCurrentMonth(userId);
     }
+
+    public Double sumCurrentMonthsSpendsByUser(long userId) {
+        return spendingTrackingRepository.sumCurrentMonthsSpendsByUser(userId);
+    }
+
+    public Double sumLastMonthsSpendsByUser(long userId) {
+        return spendingTrackingRepository.sumLastMonthsSpendsByUser(userId);
+    }
 }

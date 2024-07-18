@@ -51,6 +51,16 @@ public class SpendingTrackerController {
     return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.getSpendsForCurrentMonth(userId));
   }
 
+  @GetMapping("/calculateCurrentMonthSpends/{userId}")
+  public  ResponseEntity<Double> sumCurrentMonthsSpendsByUser(@PathVariable long userId) {
+    return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.sumCurrentMonthsSpendsByUser(userId));
+  }
+
+  @GetMapping("/calculateLastMonthSpends/{userId}")
+  public  ResponseEntity<Double> sumLastMonthsSpendsByUser(@PathVariable long userId) {
+    return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.sumLastMonthsSpendsByUser(userId));
+  }
+
 
 
 }
