@@ -1,12 +1,15 @@
 package com.spendingTracker.SpendingTracker;
 
 import com.spendingTracker.SpendingTracker.DatabaseTables.SpendingTracking;
+import com.spendingTracker.SpendingTracker.DatabaseTables.UserBudgets;
 import com.spendingTracker.SpendingTracker.DatabaseTables.Users;
 import com.spendingTracker.SpendingTracker.Interfaces.SpendingTrackingRepository;
+import com.spendingTracker.SpendingTracker.Interfaces.UserBudgetsRepository;
 import com.spendingTracker.SpendingTracker.Interfaces.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +21,9 @@ public class SpendingTrackerService {
     @Autowired
     UsersRepository usersRepository;
 
+    @Autowired
+    UserBudgetsRepository userBudgetsRepository;
+
     // CREATE
     public void addUserToDatabase(Users user) {
         usersRepository.save(user);
@@ -25,6 +31,10 @@ public class SpendingTrackerService {
 
     public void addSpendToDatabase(SpendingTracking spendingTracking){
         spendingTrackingRepository.save((spendingTracking));
+    }
+
+    public void addBudgetToDataBase(UserBudgets userBudgets){
+        userBudgetsRepository.save((userBudgets));
     }
 
     // READ
@@ -36,8 +46,19 @@ public class SpendingTrackerService {
         return usersRepository.findUserByEmail(email);
     }
 
-    public SpendingTracking findSpendsByUserId(long userId) {
+    public List<SpendingTracking> findSpendsByUserId(long userId) {
         return spendingTrackingRepository.findSpendsByUserId(userId);
     }
 
+    public List<SpendingTracking> getSpendsForCurrentMonth(long userId) {
+        return spendingTrackingRepository.getSpendsForCurrentMonth(userId);
+    }
+
+    public Double sumCurrentMonthsSpendsByUser(long userId) {
+        return spendingTrackingRepository.sumCurrentMonthsSpendsByUser(userId);
+    }
+
+    public Double sumLastMonthsSpendsByUser(long userId) {
+        return spendingTrackingRepository.sumLastMonthsSpendsByUser(userId);
+    }
 }

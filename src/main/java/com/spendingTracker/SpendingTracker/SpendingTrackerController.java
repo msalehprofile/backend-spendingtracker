@@ -1,6 +1,7 @@
 package com.spendingTracker.SpendingTracker;
 
 import com.spendingTracker.SpendingTracker.DatabaseTables.SpendingTracking;
+import com.spendingTracker.SpendingTracker.DatabaseTables.UserBudgets;
 import com.spendingTracker.SpendingTracker.DatabaseTables.Users;
 import com.spendingTracker.SpendingTracker.Interfaces.SpendingTrackingRepository;
 import com.spendingTracker.SpendingTracker.Interfaces.UsersRepository;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -29,6 +32,12 @@ public class SpendingTrackerController {
     return spendingTracking;
   }
 
+  @PostMapping("/createbudget")
+  public UserBudgets addSpendToDatabase(@RequestBody UserBudgets userBudgets) {
+    spendingTrackerService.addBudgetToDataBase(userBudgets);
+    return userBudgets;
+  }
+
   @GetMapping("/checkuserexists/{email}")
   public ResponseEntity<Boolean> findIfEmailExists(@PathVariable String email) {
     return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.checksEmailAlreadyExists(email));
@@ -40,8 +49,23 @@ public class SpendingTrackerController {
   }
 
   @GetMapping("/findSpendsByUserId/{userId}")
-  public  ResponseEntity<SpendingTracking> findSpendsByUserId(@PathVariable long userId) {
+  public  ResponseEntity<List<SpendingTracking>> findSpendsByUserId(@PathVariable long userId) {
     return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.findSpendsByUserId(userId));
+  }
+
+  @GetMapping("/findSpendsForCurrentMonth/{userId}")
+  public  ResponseEntity<List<SpendingTracking>> getSpendsForCurrentMonth(@PathVariable long userId) {
+    return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.getSpendsForCurrentMonth(userId));
+  }
+
+  @GetMapping("/calculateCurrentMonthSpends/{userId}")
+  public  ResponseEntity<Double> sumCurrentMonthsSpendsByUser(@PathVariable long userId) {
+    return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.sumCurrentMonthsSpendsByUser(userId));
+  }
+
+  @GetMapping("/calculateLastMonthSpends/{userId}")
+  public  ResponseEntity<Double> sumLastMonthsSpendsByUser(@PathVariable long userId) {
+    return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.sumLastMonthsSpendsByUser(userId));
   }
 
 
