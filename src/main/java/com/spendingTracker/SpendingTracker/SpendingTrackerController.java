@@ -1,6 +1,7 @@
 package com.spendingTracker.SpendingTracker;
 
 import com.spendingTracker.SpendingTracker.DatabaseTables.SpendingTracking;
+import com.spendingTracker.SpendingTracker.DatabaseTables.UserBudgets;
 import com.spendingTracker.SpendingTracker.DatabaseTables.Users;
 import com.spendingTracker.SpendingTracker.Interfaces.SpendingTrackingRepository;
 import com.spendingTracker.SpendingTracker.Interfaces.UsersRepository;
@@ -29,6 +30,12 @@ public class SpendingTrackerController {
   public SpendingTracking addSpendToDatabase(@RequestBody SpendingTracking spendingTracking) {
     spendingTrackerService.addSpendToDatabase(spendingTracking);
     return spendingTracking;
+  }
+
+  @PostMapping("/createbudget")
+  public UserBudgets addSpendToDatabase(@RequestBody UserBudgets userBudgets) {
+    spendingTrackerService.addBudgetToDataBase(userBudgets);
+    return userBudgets;
   }
 
   @GetMapping("/checkuserexists/{email}")
