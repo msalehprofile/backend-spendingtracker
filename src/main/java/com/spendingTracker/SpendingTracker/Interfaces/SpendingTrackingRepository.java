@@ -6,11 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 public interface SpendingTrackingRepository extends JpaRepository<SpendingTracking, Long> {
 
-    public List<SpendingTracking> findSpendsByUserId(long userId);
+    @Query(value="SELECT * FROM spending_tracker.spending_tracker " +
+            "WHERE user_id = :userId " +
+            "ORDER BY date DESC", nativeQuery = true)
+    public List<SpendingTracking> findSpendsByUserId(@Param("userId") long userId);
 
     @Query(value="SELECT * FROM spending_tracker.spending_tracker " +
             "WHERE MONTH(date) = MONTH(CURRENT_DATE()) " +
