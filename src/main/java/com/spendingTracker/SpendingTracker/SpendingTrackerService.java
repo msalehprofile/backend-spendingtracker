@@ -7,8 +7,10 @@ import com.spendingTracker.SpendingTracker.Interfaces.SpendingTrackingRepository
 import com.spendingTracker.SpendingTracker.Interfaces.UserBudgetsRepository;
 import com.spendingTracker.SpendingTracker.Interfaces.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,8 +48,10 @@ public class SpendingTrackerService {
         return usersRepository.findUserByEmail(email);
     }
 
+
     public List<SpendingTracking> findSpendsByUserId(long userId) {
-        return spendingTrackingRepository.findSpendsByUserId(userId);
+        List<SpendingTracking> spends = spendingTrackingRepository.findSpendsByUserId(userId);
+        return spends.stream().limit(5).toList();
     }
 
     public List<SpendingTracking> getSpendsForCurrentMonth(long userId) {
