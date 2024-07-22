@@ -66,8 +66,13 @@ public class SpendingTrackerController {
   @GetMapping("/calculateLastMonthSpends/{userId}")
   public  ResponseEntity<Double> sumLastMonthsSpendsByUser(@PathVariable long userId) {
     return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.sumLastMonthsSpendsByUser(userId));
-  }
+  };
 
+
+  @GetMapping("/findBudgetsByUserId/{userId}")
+    public ResponseEntity<UserBudgets> findBudgetsByUserId(@PathVariable long userId) {
+      return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.findBudgetByUserId(userId));
+    }
 
 
 }
