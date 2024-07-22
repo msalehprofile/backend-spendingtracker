@@ -69,8 +69,8 @@ public class SpendingTrackerController {
   };
 
 
-  @GetMapping("findBudgetsByUserId/{userId}")
-    public ResponseEntity<UserBudgets> findBudgetsByUserId(@PathVariable Long userId) {
+  @GetMapping("/findBudgetsByUserId/{userId}")
+    public ResponseEntity<UserBudgets> findBudgetsByUserId(@PathVariable long userId) {
       return ResponseEntity.status(HttpStatus.OK).body(spendingTrackerService.findBudgetByUserId(userId));
     }
 

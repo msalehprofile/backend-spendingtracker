@@ -62,7 +62,7 @@ public class SpendingTrackerService {
         return spendingTrackingRepository.sumLastMonthsSpendsByUser(userId);
     }
 
-    public UserBudgets findBudgetByUserId(Long userId) {
+    public UserBudgets findBudgetByUserId(long userId) {
         return userBudgetsRepository.findBudgetsByUserId(userId);
     }
 }
