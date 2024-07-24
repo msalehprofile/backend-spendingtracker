@@ -3,9 +3,8 @@ name: Maven Package
 on: [push]
 
 jobs:
-  build:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
 
