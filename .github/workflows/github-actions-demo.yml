@@ -17,4 +17,5 @@ jobs:
       - name: Maven Package
         env:
           API_KEY: ${{ secrets.API_KEY }}
+          JAVA_HOME: ${{ steps.setup-java.outputs.path }}
         run: mvn -B clean package -e -X
