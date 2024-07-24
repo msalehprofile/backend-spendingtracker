@@ -40,3 +40,9 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}  # This is how you reference the secret
           JAVA_HOME: ${{ steps.setup-java.outputs.path }} # Ensure JAVA_HOME is set
         run: mvn -B clean package -e -X
+      - name: Archive Surefire reports if the build fails
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+         name: surefire-reports
+         path: target/surefire-reports
