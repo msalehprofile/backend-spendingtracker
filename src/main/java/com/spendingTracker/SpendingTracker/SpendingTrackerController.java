@@ -33,9 +33,14 @@ public class SpendingTrackerController {
   }
 
   @PostMapping("/createbudget")
-  public UserBudgets addSpendToDatabase(@RequestBody UserBudgets userBudgets) {
-    spendingTrackerService.addBudgetToDataBase(userBudgets);
-    return userBudgets;
+  public ResponseEntity<UserBudgets> addSpendToDatabase(@RequestBody UserBudgets userBudgets) {
+    try {
+      spendingTrackerService.addBudgetToDataBase(userBudgets);
+      return new ResponseEntity<>(userBudgets, HttpStatus.OK);
+    } catch (Exception e) {
+      // Log the exception and return a proper error response
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @GetMapping("/checkuserexists/{email}")

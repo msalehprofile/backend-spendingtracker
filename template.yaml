@@ -7,32 +7,33 @@ Globals:
 
 Resources:
   ProductApiFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
-      Handler: com.product.api.StreamLambdaHandler::handleRequest
+      Handler: com.spendingTracker.SpendingTracker.StreamLambdaHandler::handleRequest
       Runtime: java17
       VpcConfig:
         SecurityGroupIds:
-          - sg-0c5e4c7f58f50f3d2
-        Subnets:
-          - subnet-0b5462b1e5522cd99
-          - subnet-07bc21343a93eae91
-          - subnet-0b87022a89e0df8ae
-          - subnet-0329421d7b78548e
+          - sg-0e0204b1c59588b74
+        SubnetIds:
+          - subnet-0ed8376a38c3cba4d
+          - subnet-0fa02b178f699e57d
+          - subnet-05b184902e50cddc5
+          - subnet-0eea081e8b0a1e57a
+          - subnet-06da7c36ae9d368d1
+          - subnet-0e73c22bcf5cf57eb
       Architectures:
         - x86_64
       MemorySize: 512
-      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+      Environment:
         Variables:
-          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1 # More info about tiered compilation https://aws.amazon.com/blogs/compute/optimizing-aws-lambda-function-performance-for-java/
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
       Policies:
         - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:product-db-cred-7criSX
-
+            SecretArn: arn:aws:secretsmanager:us-east-1:025066278641:secret:product-db-cred-7criSX
       Events:
         HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api
           Properties:
             Path: /{proxy+}
             Method: ANY
