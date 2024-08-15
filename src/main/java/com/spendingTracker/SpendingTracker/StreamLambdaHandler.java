@@ -13,6 +13,7 @@ import java.io.OutputStream;
 
 public class StreamLambdaHandler implements RequestStreamHandler {
     private static SpringBootLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
+
     static {
         try {
             handler = SpringBootLambdaContainerHandler.getAwsProxyHandler(SpendingTrackerApplication.class);
@@ -30,4 +31,6 @@ public class StreamLambdaHandler implements RequestStreamHandler {
             throws IOException {
         handler.proxyStream(inputStream, outputStream, context);
     }
+
+
 }

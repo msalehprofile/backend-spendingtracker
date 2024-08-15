@@ -3,7 +3,7 @@ Transform: AWS::Serverless-2016-10-31
 
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 60
 
 Resources:
   ProductApiFunction:
@@ -24,10 +24,14 @@ Resources:
           - subnet-0e73c22bcf5cf57eb
       Architectures:
         - x86_64
-      MemorySize: 512
+      MemorySize: 800
       Environment:
         Variables:
           JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+          MYSQL_HOST: rds-spending-tracker-db.cdmiewgukza1.us-east-1.rds.amazonaws.com
+          SPRING_DATASOURCE_URL: jdbc:mysql://rds-spending-tracker-db.cdmiewgukza1.us-east-1.rds.amazonaws.com:3306/spending_tracker
+          SPRING_DATASOURCE_USERNAME: admin
+          SPRING_DATASOURCE_PASSWORD: RDSPassword
       Policies:
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: arn:aws:secretsmanager:us-east-1:025066278641:secret:product-db-cred-7criSX
